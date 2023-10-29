@@ -23,6 +23,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -70,4 +71,21 @@ public class Vote extends BaseEntity {
 
 	@OneToMany(mappedBy = "vote", cascade = CascadeType.REMOVE)
 	private List<Voter> voters = new ArrayList<>();
+
+	@Builder
+	private Vote(
+		@NotNull final Long memberId,
+		@NotNull final Item option1Item,
+		@NotNull final Item option2Item,
+		@NotNull final Hobby hobby,
+		@NotNull final String content
+	) {
+		this.memberId = memberId;
+		this.option1Item = option1Item;
+		this.option2Item = option2Item;
+		this.hobby = hobby;
+		this.content = content;
+		this.startTime = LocalDateTime.now();
+		this.endTime = startTime.plusDays(1);
+	}
 }
