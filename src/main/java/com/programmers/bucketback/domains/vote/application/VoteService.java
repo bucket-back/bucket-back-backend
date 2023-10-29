@@ -23,6 +23,7 @@ public class VoteService {
 		final Long memberId = MemberUtils.getCurrentMemberId();
 		final Item optionItem1 = itemReader.read(request.option1ItemId());
 		final Item optionItem2 = itemReader.read(request.option2ItemId());
+
 		final Vote vote = voteAppender.append(memberId, optionItem1, optionItem2, request.hobby(), request.content());
 
 		return vote.getId();
