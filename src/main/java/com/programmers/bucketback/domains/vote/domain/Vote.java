@@ -1,18 +1,21 @@
 package com.programmers.bucketback.domains.vote.domain;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.programmers.bucketback.domains.common.BaseEntity;
 import com.programmers.bucketback.domains.common.Hobby;
+import com.programmers.bucketback.domains.item.domain.Item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -31,25 +34,23 @@ public class Vote extends BaseEntity {
 	private Long id;
 
 	@NotNull
-	@Column(name = "members_id")
+	@Column(name = "member_id")
 	private Long memberId;
 
 	@NotNull
-	@Column(name = "option1_item_id")
-	private Long option1Item1Id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "option1_item_id")
+	private Item option1Item;
 
 	@NotNull
-	@Column(name = "option2_item_id")
-	private Long option2ItemId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "option2_item_id")
+	private Item option2Item;
 
 	@NotNull
 	@Column(name = "hobby")
 	@Enumerated(EnumType.STRING)
 	private Hobby hobby;
-
-	@NotNull
-	@Column(name = "title")
-	private String title;
 
 	@NotNull
 	@Column(name = "content")
