@@ -1,7 +1,6 @@
 package com.programmers.bucketback.domains.vote.application;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.programmers.bucketback.domains.common.MemberUtils;
 import com.programmers.bucketback.domains.item.domain.Item;
@@ -12,13 +11,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class VoteService {
 
 	private final VoteAppender voteAppender;
 	private final ItemReader itemReader;
 
-	@Transactional
 	public Long createVote(final CreateVoteServiceRequest request) {
 		final Long memberId = MemberUtils.getCurrentMemberId();
 		final Item optionItem1 = itemReader.read(request.option1ItemId());

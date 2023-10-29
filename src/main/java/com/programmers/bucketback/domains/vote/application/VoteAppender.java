@@ -1,6 +1,7 @@
 package com.programmers.bucketback.domains.vote.application;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.programmers.bucketback.domains.common.Hobby;
 import com.programmers.bucketback.domains.item.domain.Item;
@@ -15,6 +16,7 @@ public class VoteAppender {
 
 	private final VoteReposiory voteReposiory;
 
+	@Transactional
 	public Vote append(
 		final Long memberId,
 		final Item optionItem1,
