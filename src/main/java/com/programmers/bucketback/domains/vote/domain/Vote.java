@@ -1,11 +1,14 @@
 package com.programmers.bucketback.domains.vote.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.programmers.bucketback.domains.common.BaseEntity;
 import com.programmers.bucketback.domains.common.Hobby;
 import com.programmers.bucketback.domains.item.domain.Item;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -63,4 +67,7 @@ public class Vote extends BaseEntity {
 	@NotNull
 	@Column(name = "end_time")
 	private LocalDateTime endTime;
+
+	@OneToMany(mappedBy = "vote", cascade = CascadeType.REMOVE)
+	private List<Voter> voters = new ArrayList<>();
 }
