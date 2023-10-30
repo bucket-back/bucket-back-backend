@@ -19,8 +19,8 @@ public enum ErrorCode {
 	ITEM_MARKET_NOT_FOUND("ITEM_001", "요청 url에 해당하는 상품을 찾을 수 없습니다."),
 
 	//Bucket
-	BUCKET_NOT_FOUND("BUCKET_001", "버킷을 찾을 수 없습니다.")
-	;
+	BUCKET_NOT_FOUND("BUCKET_001", "버킷을 찾을 수 없습니다."),
+	BUCKET_ITEM_NOT_FOUND("BUCKET_002", "버킷아이템을 찾을 수 없습니다.");
 
 	private final String code;
 	private final String message;
