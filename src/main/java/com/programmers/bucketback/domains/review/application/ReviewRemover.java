@@ -14,9 +14,7 @@ public class ReviewRemover {
 	private final ReviewReader reviewReader;
 	private final ReviewRepository reviewRepository;
 
-	public void remove(
-		final Long reviewId
-	) {
+	public void remove(final Long reviewId) {
 		Review review = reviewReader.read(reviewId);
 		reviewRepository.delete(review);
 	}
