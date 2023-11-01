@@ -14,7 +14,7 @@ public class ReviewValidator {
 
 	private final ReviewReader reviewReader;
 
-	public void validItemReview(
+	public void validateReviewComeFromItem(
 		final Long itemId,
 		final Long reviewId
 	) {
@@ -24,7 +24,7 @@ public class ReviewValidator {
 		}
 	}
 
-	public void validOwner(
+	public void validateMemberIsReviewOwner(
 		Long reviewId,
 		Long memberId
 	) {

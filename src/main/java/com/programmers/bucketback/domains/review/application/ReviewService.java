@@ -30,15 +30,18 @@ public class ReviewService {
 		final ReviewContent reviewContent
 	) {
 		Long memberId = MemberUtils.getCurrentMemberId();
-		reviewValidator.validItemReview(itemId, reviewId);
-		reviewValidator.validOwner(reviewId, memberId);
+		reviewValidator.validateReviewComeFromItem(itemId, reviewId);
+		reviewValidator.validateMemberIsReviewOwner(reviewId, memberId);
 		reviewModifier.modify(reviewId, reviewContent);
 	}
 
-	public void deleteReview(Long itemId, Long reviewId) {
+	public void deleteReview(
+		final Long itemId,
+		final Long reviewId
+	) {
 		Long memberId = MemberUtils.getCurrentMemberId();
-		reviewValidator.validItemReview(itemId, reviewId);
-		reviewValidator.validOwner(reviewId, memberId);
+		reviewValidator.validateReviewComeFromItem(itemId, reviewId);
+		reviewValidator.validateMemberIsReviewOwner(reviewId, memberId);
 		reviewRemover.remove(reviewId);
 	}
 }
