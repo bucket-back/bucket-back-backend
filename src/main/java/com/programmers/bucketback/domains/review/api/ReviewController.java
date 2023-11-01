@@ -1,6 +1,7 @@
 package com.programmers.bucketback.domains.review.api;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,6 +40,16 @@ public class ReviewController {
 		@Valid @RequestBody final ReviewUpdateRequest request
 	) {
 		reviewService.updateReview(itemId, reviewId, request.toReviewContent());
+
+		return ResponseEntity.ok().build();
+	}
+
+	@DeleteMapping("/{reviewId}")
+	public ResponseEntity<Void> deleteReview(
+		@PathVariable final Long itemId,
+		@PathVariable final Long reviewId
+	) {
+		reviewService.deleteReview(itemId, reviewId);
 
 		return ResponseEntity.ok().build();
 	}

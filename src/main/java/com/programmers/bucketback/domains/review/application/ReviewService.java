@@ -14,6 +14,7 @@ public class ReviewService {
 	private final ReviewAppender reviewAppender;
 	private final ReviewModifier reviewModifier;
 	private final ReviewValidator reviewValidator;
+	private final ReviewRemover reviewRemover;
 
 	public void createReview(
 		final Long itemId,
@@ -32,5 +33,12 @@ public class ReviewService {
 		reviewValidator.validItemReview(itemId, reviewId);
 		reviewValidator.validOwner(reviewId, memberId);
 		reviewModifier.modify(reviewId, reviewContent);
+	}
+
+	public void deleteReview(Long itemId, Long reviewId) {
+		Long memberId = MemberUtils.getCurrentMemberId();
+		reviewValidator.validItemReview(itemId, reviewId);
+		reviewValidator.validOwner(reviewId, memberId);
+		reviewRemover.remove(reviewId);
 	}
 }
