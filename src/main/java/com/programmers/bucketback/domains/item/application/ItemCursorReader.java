@@ -23,12 +23,10 @@ public class ItemCursorReader {
 		final CursorPageParameters parameters
 	) {
 		final String trimmedKeyword = keyword.trim();
-
 		if (trimmedKeyword.isEmpty()) {
 			return new ItemGetByCursorServiceResponse(null, Collections.emptyList());
 		}
-
-		int pageSize = parameters.size() == 0 ? 20 : parameters.size();
+		int pageSize = getPageSize(parameters);
 
 		List<ItemCursorSummary> itemCursorSummaries = itemRepository.findAllByCursor(
 			trimmedKeyword,
@@ -36,12 +34,31 @@ public class ItemCursorReader {
 			pageSize
 		);
 
-		String nextCursorId =
-			itemCursorSummaries.size() == 0 ? null : itemCursorSummaries.get(itemCursorSummaries.size() - 1).cursorId();
+		String nextCursorId = getNextCursorId(itemCursorSummaries);
 
 		return new ItemGetByCursorServiceResponse(
 			nextCursorId,
 			itemCursorSummaries
 		);
+	}
+
+	private String getNextCursorId(final List<ItemCursorSummary> itemCursorSummaries) {
+		int size = itemCursorSummaries.size();
+		if (size == 0) {
+			return null;
+		}
+
+		ItemCursorSummary lastElement = itemCursorSummaries.get(size - 1);
+
+		return lastElement.cursorId();
+	}
+
+	private int getPageSize(final CursorPageParameters parameters) {
+		int pageSize = parameters.size();
+		if (pageSize == 0) {
+			return 20;
+		}
+
+		return pageSize;
 	}
 }
