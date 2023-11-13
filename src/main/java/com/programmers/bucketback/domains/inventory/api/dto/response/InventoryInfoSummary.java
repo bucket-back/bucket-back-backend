@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class InventoryInfoSummary {
 	private Hobby hobby;
 	private Long inventoryId;
-	private int inventoryTotalPrice;
+	private int totalPrice;
 	private List<ItemImage> itemImages;
 
 	public void setItemImages(final List<ItemImage> subList) {

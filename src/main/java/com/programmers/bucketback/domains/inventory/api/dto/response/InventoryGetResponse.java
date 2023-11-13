@@ -12,14 +12,14 @@ public record InventoryGetResponse(
 	Long memberId,
 	Hobby hobby,
 	int itemCount,
-	List<InventoryItemGetResponse> inventoryItemGetResponses
+	List<InventoryItemGetResponse> inventoryItems
 ) {
 	public static InventoryGetResponse from(final GetInventoryServiceResponse serviceResponse) {
 		return InventoryGetResponse.builder()
 			.memberId(serviceResponse.memberId())
 			.hobby(serviceResponse.hobby())
 			.itemCount(serviceResponse.itemCount())
-			.inventoryItemGetResponses(serviceResponse.inventoryItemGetResponses())
+			.inventoryItems(serviceResponse.inventoryItemGetResponses())
 			.build();
 	}
 }

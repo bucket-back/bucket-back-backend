@@ -11,7 +11,6 @@ import com.programmers.bucketback.domains.common.vo.CursorPageParameters;
 import com.programmers.bucketback.domains.inventory.api.dto.response.InventoryGetReviewedItemResponse;
 import com.programmers.bucketback.domains.inventory.api.dto.response.InventoryInfoSummary;
 import com.programmers.bucketback.domains.inventory.application.dto.GetInventoryServiceResponse;
-import com.programmers.bucketback.domains.inventory.domain.Inventory;
 import com.programmers.bucketback.global.error.exception.BusinessException;
 import com.programmers.bucketback.global.error.exception.ErrorCode;
 
@@ -43,9 +42,8 @@ public class InventoryService {
 		final ItemIdRegistry itemIdRegistry
 	) {
 		Long memberId = MemberUtils.getCurrentMemberId();
-		Inventory inventory = inventoryReader.read(inventoryId, memberId);
 
-		inventoryModifier.modify(inventory, itemIdRegistry);
+		inventoryModifier.modify(inventoryId, memberId, itemIdRegistry);
 	}
 
 	/** 인벤토리 삭제 */
