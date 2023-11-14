@@ -1,11 +1,13 @@
 package com.programmers.bucketback.domains.common;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.programmers.bucketback.global.error.exception.BusinessException;
 import com.programmers.bucketback.global.error.exception.ErrorCode;
@@ -34,6 +36,14 @@ public enum Hobby {
 	@JsonValue
 	private final String hobbyValue;
 	private final String name;
+
+	@JsonCreator
+	public static Hobby fromEventStatus(final String hobbyValue) {
+		return Arrays.stream(values())
+			.filter(type -> type.getName().equals(hobbyValue))
+			.findAny()
+			.orElse(null);
+	}
 
 	public static Hobby from(final String name) {
 		if (HOBBY_MAP.containsKey(name)) {
