@@ -40,7 +40,7 @@ public enum Hobby {
 	@JsonCreator
 	public static Hobby fromEventStatus(final String hobbyValue) {
 		return Arrays.stream(values())
-			.filter(type -> type.getName().equals(hobbyValue))
+			.filter(type -> type.getHobbyValue().equals(hobbyValue))
 			.findAny()
 			.orElse(null);
 	}
