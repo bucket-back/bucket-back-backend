@@ -53,7 +53,7 @@ public class FeedRepositoryForCursorImpl implements FeedRepositoryForCursor {
 			feedIds = jpaQueryFactory.select(feedLike.feed.id)
 				.from(feedLike)
 				.where(
-					eqLikeMemberId(myPageMemberId),
+					eqLikeMemberId(nicknameMemberId),
 					feedLike.feed.id.in(feedIds)
 				).fetch();
 		}
@@ -117,7 +117,14 @@ public class FeedRepositoryForCursorImpl implements FeedRepositoryForCursor {
 		return member.id.eq(feedItem.feed.memberId);
 	}
 
-	private BooleanExpression eqMemberId(final Long memberId) {
+	private BooleanExpression eqMemberId(
+		final Long memberId,
+		final boolean nicknameLikeFeeds
+	) {
+		if (nicknameLikeFeeds) {
+			return null;
+		}
+
 		if (memberId == null) {
 			return null;
 		}
