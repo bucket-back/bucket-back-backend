@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class SseEmitters {
 
-	private static final Long DEFAULT_TIMEOUT = 10 * 1000L; //
+	private static final Long DEFAULT_TIMEOUT = 25 * 1000L; //25초
 	private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
 
 	public SseEmitter add(final Long receiverId) {
