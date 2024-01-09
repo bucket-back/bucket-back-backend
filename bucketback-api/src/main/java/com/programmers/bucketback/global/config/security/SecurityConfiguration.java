@@ -63,6 +63,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/api/{nickname}/buckets/**").permitAll()
 
 					.requestMatchers("/api/hobbies").permitAll()
+					.requestMatchers("/api/sse/subscribe").permitAll()
 
 					.anyRequest().authenticated()
 			)

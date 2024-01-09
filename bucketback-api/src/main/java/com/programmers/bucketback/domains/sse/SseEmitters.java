@@ -12,16 +12,18 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class SseEmitters {
 
-	private static final Long DEFAULT_TIMEOUT = 30 * 60 * 1000L; // 60분
+	private static final Long DEFAULT_TIMEOUT = 10 * 1000L; //
 	private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
 
 	public SseEmitter add(final Long receiverId) {
 		SseEmitter sseEmitter = new SseEmitter(DEFAULT_TIMEOUT);
-
 		this.emitters.put(receiverId, sseEmitter);
 		sseEmitter.onTimeout(sseEmitter::complete);
 		sseEmitter.onCompletion(() -> this.emitters.remove(receiverId));
-		sseEmitter.onError((e) -> this.emitters.remove(receiverId));
+		sseEmitter.onError((e) -> {
+			log.error("error with emitter");
+			this.emitters.remove(receiverId);
+		});
 
 		return sseEmitter;
 	}
