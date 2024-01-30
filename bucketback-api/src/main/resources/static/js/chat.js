@@ -8,6 +8,8 @@ let userNickname = 'user' + generateRandomString(6);
 // connet() 함수에서 할당
 let myRoomId;
 
+const token = localStorage.getItem('jwt-token');
+
 // 랜덤 문자열을 생성하는 함수
 // 사용자 닉네임 생성할 때 사용
 function generateRandomString(length) {
@@ -92,7 +94,9 @@ function connect(roomId) {
     let socket = new SockJS('/ws-stomp');
     stompClient = Stomp.over(socket);
     myRoomId = roomId;
-    stompClient.connect({}, function (frame) {
+    let headers = {Authorization: token};
+
+    stompClient.connect(headers, function (frame) {
         console.log('websocket with stomp for chat is connected');
         console.log('connected info: ' + frame);
         stompClient.subscribe('/subscribe/rooms/' + myRoomId, function (messageOutput) {
@@ -147,8 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (message.length > 0) {
 
+            const headers = {Authorization: token};
             // 서버로 메시지 전송
-            stompClient.send('/app/publish/messages', {},
+            stompClient.send('/app/publish/messages', headers,
+
                 JSON.stringify({
                     'userNickname': userNickname,
                     'chatRoomId': myRoomId,
