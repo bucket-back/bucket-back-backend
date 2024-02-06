@@ -59,14 +59,13 @@ public class ChatPreHandler implements ChannelInterceptor {
 
 				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(memberId);
 
-				if (jwtService.isTokenValid(jwt, userDetails)) {
-					final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-						userDetails,
-						null,
-						userDetails.getAuthorities()
-					);
-					accessor.setUser(authToken);
-				}
+				final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+					userDetails,
+					null,
+					userDetails.getAuthorities()
+				);
+				accessor.setUser(authToken);
+
 
 				return message;
 
