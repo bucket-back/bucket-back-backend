@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/api/members/check/nickname").permitAll()
 					.requestMatchers("/api/members/check/email").permitAll()
 					.requestMatchers("/api/members/{nickname}").permitAll()
+					.requestMatchers("/api/members/refresh").permitAll()
 
 					.requestMatchers(HttpMethod.GET, "/api/votes").permitAll()
 					.requestMatchers(HttpMethod.GET, "/api/votes/{voteId}").permitAll()
@@ -66,7 +67,7 @@ public class SecurityConfiguration {
 					.requestMatchers("/js/**").permitAll()
 					.requestMatchers("/css/**").permitAll()
 					.requestMatchers("/images/**").permitAll()
-
+					.requestMatchers("/api/sse/subscribe").permitAll()
 					.requestMatchers("/chat/**").permitAll()
 					.requestMatchers("/chat-rooms").permitAll()
 
